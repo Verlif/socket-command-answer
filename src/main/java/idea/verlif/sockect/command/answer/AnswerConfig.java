@@ -1,5 +1,6 @@
 package idea.verlif.sockect.command.answer;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import idea.verlif.socket.command.config.ConfigAdapter;
 
 import java.io.*;
@@ -25,6 +26,7 @@ public class AnswerConfig implements ConfigAdapter {
         this.dataPath = dataPath;
     }
 
+    @JsonIgnore
     public Properties getProperties() {
         File file = new File(dataPath);
         if (!file.exists()) {
@@ -34,8 +36,9 @@ public class AnswerConfig implements ConfigAdapter {
                     return null;
                 }
             }
-            try {
-                file.createNewFile();
+            try (FileWriter writer = new FileWriter(file)) {
+                writer.write("hello=hello");
+                writer.flush();
             } catch (IOException ignored) {
             }
         }

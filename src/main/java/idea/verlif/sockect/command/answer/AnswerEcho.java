@@ -7,9 +7,18 @@ import java.util.Properties;
  */
 public class AnswerEcho {
 
-    private final Properties properties;
+    private final AnswerConfig config;
+    private Properties properties;
 
     public AnswerEcho(AnswerConfig config) {
+        this.config = config;
+        reload();
+    }
+
+    /**
+     * 重新加载对话配置
+     */
+    public void reload() {
         properties = config.getProperties();
     }
 
